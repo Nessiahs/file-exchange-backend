@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import { Request, Response } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
-import { db } from "../db/db";
+import { userByEmail } from "../db/userByEmail";
 import { createToken } from "../helper/createToken";
 
 export const Auth = async (req: Request, res: Response) => {
@@ -11,37 +11,27 @@ export const Auth = async (req: Request, res: Response) => {
     return;
   }
 
-  db.get(
-    "SELECT id, password, salt FROM user where email=$user",
-    {
-      $user: user,
-    },
-    (err: any, result: any) => {
-      if (err) {
-        res.status(STATUS_CODES.Server_Error).send();
-        return;
-      }
+  try {
+    const { salt, password, id } = await userByEmail(user);
+    const hash = crypto.createHmac("sha512", salt);
+    hash.update(password);
+    if (hash.digest("hex") === password) {
+      createToken(
+        {
+          id,
+          type: "admin",
+        },
+        res
+      );
 
-      if (!result) {
-        res.status(STATUS_CODES.Unauthorized).send();
-        return;
-      }
-
-      const hash = crypto.createHmac("sha512", result.salt);
-      hash.update(password);
-      if (hash.digest("hex") === result.password) {
-        createToken(
-          {
-            id: result.id,
-            type: "admin",
-          },
-          res
-        );
-
-        res.send({ success: true });
-      } else {
-        res.status(STATUS_CODES.Unauthorized).send();
-      }
+      res.send({ success: true });
+    } else {
+      res.status(STATUS_CODES.Unauthorized).send();
     }
-  );
+  } catch (error) {
+    if (error === "notFound") {
+      return res.status(STATUS_CODES.Forbidden).send();
+    }
+    res.status(STATUS_CODES.Server_Error).send();
+  }
 };

@@ -5,8 +5,8 @@ import "./config/jwt";
 import "./db/db";
 import { adminRoutes } from "./routes/admin";
 import { downloadRoutes } from "./routes/download";
+import { installRoutes } from "./routes/install";
 import { uploadRoutes } from "./routes/upload";
-import { Auth } from "./service/Auth";
 import { verifyJob } from "./service/verifyJob";
 import { verifySecret } from "./service/verifySecret";
 const port = 8080; // default port to listen
@@ -34,10 +34,11 @@ app.use(
     tempFileDir: path.join(__dirname, "../tmp"),
   })
 );
-app.post("/login/", Auth);
+
 app.use("/upload", uploadRoutes);
 app.use("/admin", adminRoutes);
 app.use("/download", downloadRoutes);
+app.use("/install", installRoutes);
 
 // start the Express server
 app.listen(port, () => {

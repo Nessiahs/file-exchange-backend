@@ -19,7 +19,7 @@ export type TCustomerUpload = {
   expired: string | null;
 };
 
-export type Tuser = {
+export type TUser = {
   id: number;
   email: string;
   password: string;

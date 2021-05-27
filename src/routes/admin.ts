@@ -12,7 +12,6 @@ import { jobByType } from "../service/jobsByType";
 
 const router = Router({ mergeParams: true });
 router.post("/login/", Auth);
-
 router.use(TokenAuth);
 // Token must be from type admin
 router.use((req: Request, res: Response, next: NextFunction) => {
