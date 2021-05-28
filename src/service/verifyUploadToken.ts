@@ -12,9 +12,9 @@ const tokenPathParams = {
 
 type TTokenPathParams = typeof tokenPathParams;
 
-function isTokenPathKey(key: string): key is keyof TTokenPathParams {
+const isTokenPathKey = (key: string): key is keyof TTokenPathParams => {
   return Object.keys(tokenPathParams).includes(key);
-}
+};
 
 export const verifyUploadToken = async (req: Request, res: Response) => {
   const { hash, path } = req.params;

@@ -25,7 +25,6 @@ export const createUser = (
       },
       (err) => {
         if (err) {
-          console.log(err);
           return reject();
         }
         return resolve(true);
