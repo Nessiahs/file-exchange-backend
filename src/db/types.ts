@@ -1,3 +1,5 @@
+export type TJobType = "upload" | "download";
+
 export type TUpload = {
   id: number;
   token: string;
@@ -46,7 +48,5 @@ export type TJob = {
   expires?: string | null;
   created?: string;
   token: string;
-  created_by: number;
+  createdBy: number;
 };
-
-export type TJobType = "upload" | "download";

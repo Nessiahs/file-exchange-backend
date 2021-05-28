@@ -36,7 +36,7 @@ export const createTables = () => {
            "secret" TEXT,
            "expires" TEXT,
            "created" TEXT,
-           "created_by" integer NOT NULL,
+           "createdBy" integer NOT NULL,
            "done" integer(1,1) NOT NULL DEFAULT 0
          );`);
 

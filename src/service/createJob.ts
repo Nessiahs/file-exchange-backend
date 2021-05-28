@@ -22,7 +22,7 @@ export const createJob = async (req: Request, res: Response) => {
       secret: password,
       expires,
       token,
-      created_by: req.body.tokenData.id,
+      createdBy: req.body.tokenData.id,
     });
     res.send({ link, token });
   } catch (error) {
