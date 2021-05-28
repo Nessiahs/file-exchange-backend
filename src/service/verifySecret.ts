@@ -6,7 +6,7 @@ import { createToken } from "../helper/createToken";
 export const verifySecret = async (req: Request, res: Response) => {
   const { secret } = req.body;
   const { "x-job-type": jobType, "x-job-token": token } = req.headers;
-  console.log(secret, jobType, token);
+
   if (
     !secret ||
     !jobType ||

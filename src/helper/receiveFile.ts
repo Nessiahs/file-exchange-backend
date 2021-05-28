@@ -3,7 +3,7 @@ import fileUpload from "express-fileupload";
 import { copyFile, mkdir, rm } from "fs/promises";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
-import { filePath } from "../config/filePath";
+import { filePath } from "../config/constants";
 import { STATUS_CODES } from "../config/statusCodes";
 import { insertFileByHash } from "../db/insertFileByHash";
 export const receiveFile = async (

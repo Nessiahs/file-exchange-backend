@@ -6,16 +6,21 @@ import { createToken } from "../helper/createToken";
 
 export const Auth = async (req: Request, res: Response) => {
   const { user, password } = req.body;
-  if (!user || !password) {
+  if (
+    !user ||
+    !password ||
+    typeof user !== "string" ||
+    typeof password !== "string"
+  ) {
     res.status(STATUS_CODES.Bad_Request).send();
     return;
   }
 
   try {
-    const { salt, password, id } = await userByEmail(user);
+    const { salt, password: dbPass, id } = await userByEmail(user);
     const hash = crypto.createHmac("sha512", salt);
     hash.update(password);
-    if (hash.digest("hex") === password) {
+    if (hash.digest("hex") === dbPass) {
       createToken(
         {
           id,
