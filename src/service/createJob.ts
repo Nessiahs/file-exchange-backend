@@ -13,7 +13,7 @@ export const createJob = async (req: Request, res: Response) => {
   const token = uuidv4();
   const { jobType, jobName, password, expires } = req.body as TBodyData;
 
-  const link = `${process.env.FRONTEND_URI}${process.env.FRONTEND_UPLOAD_PATH}${token}/verify/`;
+  const link = `${process.env.FRONTEND_URI}${process.env.FRONTEND_UPLOAD_PATH}${token}/`;
 
   try {
     await insertJob({
