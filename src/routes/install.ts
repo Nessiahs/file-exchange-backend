@@ -1,11 +1,31 @@
 import { Request, Response, Router } from "express";
-import { checkInstall } from "../middleware/checkInstall";
+import { writeFile } from "fs/promises";
+import { isInstalled } from "../config/filePath";
+import { STATUS_CODES } from "../config/statusCodes";
+import { createTables } from "../db/createTables";
+import { createUser } from "../db/createUser";
 const router = Router({ mergeParams: true });
 
-router.use(checkInstall);
+router.post("/create/", async (req: Request, res: Response) => {
+  const { email, password } = req.body;
 
-router.get("/check/", (req: Request, res: Response) => {
-  res.send();
+  if (
+    !email ||
+    !password ||
+    typeof password !== "string" ||
+    typeof email !== "string"
+  ) {
+    return res.status(STATUS_CODES.Bad_Request).send();
+  }
+
+  try {
+    await createTables();
+    await createUser(email, password);
+    await writeFile(isInstalled, "");
+    res.send();
+  } catch (error) {
+    res.status(STATUS_CODES.Server_Error);
+  }
 });
 
 export const installRoutes = router;

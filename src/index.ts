@@ -3,6 +3,7 @@ import fileUpload from "express-fileupload";
 import path from "path";
 import "./config/jwt";
 import "./db/db";
+import { checkInstall } from "./middleware/checkInstall";
 import { adminRoutes } from "./routes/admin";
 import { downloadRoutes } from "./routes/download";
 import { installRoutes } from "./routes/install";
@@ -18,15 +19,21 @@ app.use(
   express.json({
     limit: "2gb",
   })
-); // for parsing application/json
+);
+
+// for parsing application/json
 app.use(
   express.urlencoded({
     limit: "2gb",
     extended: true,
   })
 );
+
+app.use(checkInstall);
+app.use("/install", installRoutes);
 app.get("/verify-job/", verifyJob);
 app.post("/verify-secret/", verifySecret);
+
 app.use(
   fileUpload({
     createParentPath: true,
@@ -38,7 +45,6 @@ app.use(
 app.use("/upload", uploadRoutes);
 app.use("/admin", adminRoutes);
 app.use("/download", downloadRoutes);
-app.use("/install", installRoutes);
 
 // start the Express server
 app.listen(port, () => {

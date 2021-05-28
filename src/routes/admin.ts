@@ -21,9 +21,9 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   }
   res.status(STATUS_CODES.Forbidden).send();
 });
+router.get("/status/", isLogedIn);
 router.get("/download/:folder/:file/", adminDownload);
 router.get("/jobs/:jobType/", jobByType);
-router.get("/status/", isLogedIn);
 router.post("/create/", createJob);
 router.get("/info/:token/:jobType", adminJobInfo);
 router.post("/upload/file/:token", adminUpload);
