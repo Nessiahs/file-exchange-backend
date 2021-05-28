@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { access } from "fs/promises";
-import { isInstalled } from "../config/filePath";
+import { isInstalled } from "../config/constants";
 import { STATUS_CODES } from "../config/statusCodes";
 
 const allowedPathes = ["/install/create/"];

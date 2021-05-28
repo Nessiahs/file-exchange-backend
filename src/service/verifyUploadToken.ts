@@ -30,7 +30,7 @@ export const verifyUploadToken = async (req: Request, res: Response) => {
       const { token: renewToken, content } = await verifyToken(token, "upload");
 
       if (!isTokenPathKey(path)) {
-        res.status(STATUS_CODES.Not_Implemented).send({ hash });
+        res.status(STATUS_CODES.NotImplemented).send({ hash });
         return;
       }
 
@@ -66,12 +66,12 @@ export const verifyUploadToken = async (req: Request, res: Response) => {
       }
 
       if (result.done === 1) {
-        res.status(STATUS_CODES.Method_Not_Allowed).send({ hash });
+        res.status(STATUS_CODES.MethodNotAllowed).send({ hash });
         return;
       }
 
       if (result.expired && new Date(result.expired).getTime() < Date.now()) {
-        res.status(STATUS_CODES.Method_Not_Allowed).send({ hash });
+        res.status(STATUS_CODES.MethodNotAllowed).send({ hash });
         return;
       }
       createToken({ id: result.id, type: "upload" }, res);

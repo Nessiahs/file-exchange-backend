@@ -20,6 +20,6 @@ export const streamFile = async (
 
     return res.download(path.join(basePath, folder, file), filename);
   } catch (error) {
-    return res.status(STATUS_CODES.Not_Found).send();
+    return res.status(STATUS_CODES.NotFound).send();
   }
 };

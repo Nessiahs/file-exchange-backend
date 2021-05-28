@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { writeFile } from "fs/promises";
-import { isInstalled } from "../config/filePath";
+import { isInstalled } from "../config/constants";
 import { STATUS_CODES } from "../config/statusCodes";
 import { createTables } from "../db/createTables";
 import { createUser } from "../db/createUser";
