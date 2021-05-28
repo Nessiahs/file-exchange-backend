@@ -12,7 +12,7 @@ export const Auth = async (req: Request, res: Response) => {
     typeof user !== "string" ||
     typeof password !== "string"
   ) {
-    res.status(STATUS_CODES.Bad_Request).send();
+    res.status(STATUS_CODES.BadRequest).send();
     return;
   }
 
@@ -37,6 +37,6 @@ export const Auth = async (req: Request, res: Response) => {
     if (error === "notFound") {
       return res.status(STATUS_CODES.Forbidden).send();
     }
-    res.status(STATUS_CODES.Server_Error).send();
+    res.status(STATUS_CODES.ServerError).send();
   }
 };

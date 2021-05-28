@@ -21,7 +21,7 @@ export const verifyUploadToken = async (req: Request, res: Response) => {
   const token = req.headers["x-jwt-token"];
 
   if (!hash || !path) {
-    res.status(STATUS_CODES.Bad_Request).send();
+    res.status(STATUS_CODES.BadRequest).send();
     return;
   }
 
@@ -37,7 +37,7 @@ export const verifyUploadToken = async (req: Request, res: Response) => {
       // Check if token has all params for this step
       const param = tokenPathParams[path];
       if (!Object.keys(content.data).includes(param)) {
-        res.status(STATUS_CODES.Bad_Request).send();
+        res.status(STATUS_CODES.BadRequest).send();
         return;
       }
 
@@ -56,12 +56,12 @@ export const verifyUploadToken = async (req: Request, res: Response) => {
     },
     (err, result: TUpload) => {
       if (err) {
-        res.status(STATUS_CODES.Server_Error).send();
+        res.status(STATUS_CODES.ServerError).send();
         return;
       }
 
       if (!result) {
-        res.status(STATUS_CODES.Bad_Request).send({ hash });
+        res.status(STATUS_CODES.BadRequest).send({ hash });
         return;
       }
 

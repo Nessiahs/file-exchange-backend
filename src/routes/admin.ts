@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
+import { allUser } from "../db/allUser";
 import { TokenAuth } from "../middleware/TokenAuth";
 import { adminDownload } from "../service/adminDownload";
 import { adminJobInfo } from "../service/adminJobInfo";
@@ -28,5 +29,6 @@ router.post("/create/", createJob);
 router.get("/info/:token/:jobType", adminJobInfo);
 router.post("/upload/file/:token", adminUpload);
 router.delete("/file/:id", deleteFile);
+router.get("/users/", allUser);
 
 export const adminRoutes = router;

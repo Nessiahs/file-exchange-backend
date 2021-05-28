@@ -26,6 +26,6 @@ export const createJob = async (req: Request, res: Response) => {
     });
     res.send({ link, token });
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error).send(error);
+    res.status(STATUS_CODES.ServerError).send(error);
   }
 };

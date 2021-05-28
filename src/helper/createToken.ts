@@ -10,6 +10,6 @@ export const createToken = (tokenData: JwtData, res: Response) => {
     res.set("x-jwt-token", token);
     return;
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error);
+    res.status(STATUS_CODES.ServerError);
   }
 };

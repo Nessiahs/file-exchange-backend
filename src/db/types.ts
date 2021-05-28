@@ -2,7 +2,7 @@ export type TUpload = {
   id: number;
   token: string;
   email: string;
-  created_at: string;
+  created: string;
   message: string | null;
   fromUser: number;
   expired: string | null;
@@ -24,6 +24,9 @@ export type TUser = {
   email: string;
   password: string;
   salt: string;
+  isAdmin: 0 | 1;
+  created: string;
+  lastLogin: string;
 };
 
 export type TFiles = {
@@ -31,7 +34,7 @@ export type TFiles = {
   token: string;
   filename: string;
   hashname: string;
-  created_at: string;
+  created: string;
   size?: number;
 };
 

@@ -6,6 +6,6 @@ export const uploads = async (req: Request, res: Response) => {
     const response = await allUploads();
     res.send(response);
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error).send(error);
+    res.status(STATUS_CODES.ServerError).send(error);
   }
 };

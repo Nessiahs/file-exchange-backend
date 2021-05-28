@@ -9,7 +9,7 @@ export const uploadFile = async (req: Request, res: Response) => {
   const { secret } = await jobByToken(token);
 
   if ((secret && !verified) || typeof token !== "string") {
-    return res.status(STATUS_CODES.Bad_Request);
+    return res.status(STATUS_CODES.BadRequest);
   }
   receiveFile(req, res, token);
 };

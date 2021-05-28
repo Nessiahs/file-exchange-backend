@@ -15,7 +15,7 @@ router.post("/create/", async (req: Request, res: Response) => {
     typeof password !== "string" ||
     typeof email !== "string"
   ) {
-    return res.status(STATUS_CODES.Bad_Request).send();
+    return res.status(STATUS_CODES.BadRequest).send();
   }
 
   try {
@@ -24,7 +24,7 @@ router.post("/create/", async (req: Request, res: Response) => {
     await writeFile(isInstalled, "");
     res.send();
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error);
+    res.status(STATUS_CODES.ServerError);
   }
 });
 

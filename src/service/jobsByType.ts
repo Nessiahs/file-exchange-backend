@@ -9,12 +9,12 @@ export const jobByType = async (req: Request, res: Response) => {
   const { jobType } = req.params;
 
   if (!jobType || !allowdTypes.includes(jobType as TJobType)) {
-    return res.status(STATUS_CODES.Bad_Request).send();
+    return res.status(STATUS_CODES.BadRequest).send();
   }
 
   try {
     res.send(await jobsByType(jobType as TJobType));
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error).send();
+    res.status(STATUS_CODES.ServerError).send();
   }
 };

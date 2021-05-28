@@ -9,10 +9,10 @@ export const adminJobInfo = async (req: Request, res: Response) => {
   const { token, jobType } = req.params;
 
   if (!token) {
-    return res.status(STATUS_CODES.Bad_Request);
+    return res.status(STATUS_CODES.BadRequest);
   }
   if (!jobType || !allowdTypes.includes(jobType as TJobType)) {
-    return res.status(STATUS_CODES.Bad_Request).send();
+    return res.status(STATUS_CODES.BadRequest).send();
   }
   const jobInfo = jobByToken(token);
   const jobFiles = filesByToken(token);
@@ -25,6 +25,6 @@ export const adminJobInfo = async (req: Request, res: Response) => {
       });
     })
     .catch(() => {
-      res.status(STATUS_CODES.Server_Error).send();
+      res.status(STATUS_CODES.ServerError).send();
     });
 };

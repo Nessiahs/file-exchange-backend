@@ -24,7 +24,7 @@ export const createTables = () => {
           "filename" text NOT NULL,
           "size" integer NOT NULL,
           "hashname" text NOT NULL,
-          "created_at" TEXT NOT NULL,
+          "created" TEXT NOT NULL,
           "downloads" integer DEFAULT 0
         );`);
 
@@ -43,11 +43,19 @@ export const createTables = () => {
         await run(`CREATE TABLE "user" (
           "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
           "email" TEXT NOT NULL,
-          "password" TEXT,
-          "salt" TEXT,
-          UNIQUE ("id" ASC),
+          "password" TEXT NOT NULL,
+          "salt" TEXT NOT NULL,
+          "isAdmin" integer(1) NOT NULL DEFAULT 0,
+          "created" TEXT NOT NULL,
+          "lastLogin" TEXT DEFAULT '',
           UNIQUE ("email" ASC)
         );`);
+
+        await run(`CREATE TABLE "settings" (
+          "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+          "type" text NOT NULL,
+          "settings" text NOT NULL,
+          UNIQUE ("type" ASC)`);
 
         await run("PRAGMA foreign_keys=ON;");
         await run("COMMIT;");

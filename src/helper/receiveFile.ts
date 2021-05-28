@@ -24,6 +24,6 @@ export const receiveFile = async (
     await rm(file.tempFilePath);
     res.send(uuid);
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error).send(error);
+    res.status(STATUS_CODES.ServerError).send(error);
   }
 };
