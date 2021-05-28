@@ -12,7 +12,6 @@ import { jobByType } from "../service/jobsByType";
 
 const router = Router({ mergeParams: true });
 router.post("/login/", Auth);
-
 router.use(TokenAuth);
 // Token must be from type admin
 router.use((req: Request, res: Response, next: NextFunction) => {
@@ -22,9 +21,9 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   }
   res.status(STATUS_CODES.Forbidden).send();
 });
+router.get("/status/", isLogedIn);
 router.get("/download/:folder/:file/", adminDownload);
 router.get("/jobs/:jobType/", jobByType);
-router.get("/status/", isLogedIn);
 router.post("/create/", createJob);
 router.get("/info/:token/:jobType", adminJobInfo);
 router.post("/upload/file/:token", adminUpload);

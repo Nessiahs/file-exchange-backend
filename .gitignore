@@ -2,6 +2,7 @@ node_modules/
 dist/
 .env
 .env.*
-db/fileExchange.db
 files/
 tmp/
+db/fileExchange.db
+install
