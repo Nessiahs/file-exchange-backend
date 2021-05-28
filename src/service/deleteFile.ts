@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { rm } from "fs/promises";
 import path from "path";
-import { filePath } from "../config/filePath";
+import { filePath } from "../config/constants";
 import { STATUS_CODES } from "../config/statusCodes";
 import { deleteFileById } from "../db/deleteFileById";
 import { fileById } from "../db/fileById";

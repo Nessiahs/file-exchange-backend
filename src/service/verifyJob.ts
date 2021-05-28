@@ -26,7 +26,7 @@ export const verifyJob = async (req: Request, res: Response) => {
     }
 
     if (expires && moment(expires) < moment()) {
-      return res.status(STATUS_CODES.Not_Acceptable).send();
+      return res.status(STATUS_CODES.NotAcceptable).send();
     }
 
     if (secret) {
