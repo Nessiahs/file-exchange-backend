@@ -5,14 +5,14 @@ import { TokenAuth } from "../middleware/TokenAuth";
 import { adminDownload } from "../service/adminDownload";
 import { adminJobInfo } from "../service/adminJobInfo";
 import { adminUpload } from "../service/adminUpload";
-import { Auth } from "../service/Auth";
+import { auth } from "../service/auth";
 import { createJob } from "../service/createJob";
 import { deleteFile } from "../service/deleteFile";
 import { isLogedIn } from "../service/isLogedIn";
 import { jobByType } from "../service/jobsByType";
 
 const router = Router({ mergeParams: true });
-router.post("/login/", Auth);
+router.post("/login/", auth);
 router.use(TokenAuth);
 // Token must be from type admin
 router.use((req: Request, res: Response, next: NextFunction) => {

@@ -20,7 +20,7 @@ router.post("/create/", async (req: Request, res: Response) => {
 
   try {
     await createTables();
-    await createUser(email, password);
+    await createUser(email, password, 1);
     await writeFile(isInstalled, "");
     res.send();
   } catch (error) {
