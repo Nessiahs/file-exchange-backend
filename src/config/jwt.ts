@@ -3,8 +3,16 @@ import jwt, { Algorithm } from "jsonwebtoken";
 import path from "path";
 import { getRandomString } from "../helper/getRandomString";
 
+const getNodeEnv = () => {
+  if (!process.env.NODE_ENV) {
+    return "";
+  }
+
+  return `.${process.env.NODE_ENV}`;
+};
+
 dotenv.config({
-  path: path.join(__dirname, `../../.env.${process.env.NODE_ENV}`),
+  path: path.join(__dirname, `../../.env${getNodeEnv()}`),
 });
 const jwtAlgorithms = [
   "HS256",
