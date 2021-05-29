@@ -14,5 +14,5 @@
     "typeRoots": ["../node_modules/@types"],
     "lib": ["es5", "es2015.promise", "DOM", "ScriptHost"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "../file-exchange-ui/src/hooks/useVerifyEmail.ts"]
 }

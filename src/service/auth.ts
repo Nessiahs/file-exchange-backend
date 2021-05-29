@@ -4,7 +4,7 @@ import { STATUS_CODES } from "../config/statusCodes";
 import { userByEmail } from "../db/userByEmail";
 import { createToken } from "../helper/createToken";
 
-export const Auth = async (req: Request, res: Response) => {
+export const auth = async (req: Request, res: Response) => {
   const { user, password } = req.body;
   if (
     !user ||
@@ -12,12 +12,18 @@ export const Auth = async (req: Request, res: Response) => {
     typeof user !== "string" ||
     typeof password !== "string"
   ) {
-    res.status(STATUS_CODES.Bad_Request).send();
+    res.status(STATUS_CODES.BadRequest).send();
     return;
   }
 
   try {
-    const { salt, password: dbPass, id } = await userByEmail(user);
+    const {
+      salt,
+      password: dbPass,
+      id,
+      isAdmin,
+      lastLogin,
+    } = await userByEmail(user);
     const hash = crypto.createHmac("sha512", salt);
     hash.update(password);
     if (hash.digest("hex") === dbPass) {
@@ -25,11 +31,12 @@ export const Auth = async (req: Request, res: Response) => {
         {
           id,
           type: "admin",
+          isAdmin,
         },
         res
       );
 
-      res.send({ success: true });
+      res.send({ isAdmin, lastLogin });
     } else {
       res.status(STATUS_CODES.Unauthorized).send();
     }
@@ -37,6 +44,6 @@ export const Auth = async (req: Request, res: Response) => {
     if (error === "notFound") {
       return res.status(STATUS_CODES.Forbidden).send();
     }
-    res.status(STATUS_CODES.Server_Error).send();
+    res.status(STATUS_CODES.ServerError).send();
   }
 };

@@ -15,16 +15,16 @@ router.post("/create/", async (req: Request, res: Response) => {
     typeof password !== "string" ||
     typeof email !== "string"
   ) {
-    return res.status(STATUS_CODES.Bad_Request).send();
+    return res.status(STATUS_CODES.BadRequest).send();
   }
 
   try {
     await createTables();
-    await createUser(email, password);
+    await createUser(email, password, 1);
     await writeFile(isInstalled, "");
     res.send();
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error);
+    res.status(STATUS_CODES.ServerError);
   }
 });
 

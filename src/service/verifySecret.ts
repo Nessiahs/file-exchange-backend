@@ -16,13 +16,13 @@ export const verifySecret = async (req: Request, res: Response) => {
     typeof jobType !== "string" ||
     !isJobType(jobType)
   ) {
-    return res.status(STATUS_CODES.Bad_Request).send();
+    return res.status(STATUS_CODES.BadRequest).send();
   }
 
   try {
     const data = await jobByToken(token);
     if (data.jobType !== jobType) {
-      return res.status(STATUS_CODES.Bad_Request).send();
+      return res.status(STATUS_CODES.BadRequest).send();
     }
     if (data.secret !== secret) {
       return res.status(STATUS_CODES.Forbidden).send();

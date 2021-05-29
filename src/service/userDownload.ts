@@ -12,7 +12,7 @@ export const userDownload = (req: Request, res: Response) => {
     !token ||
     typeof token !== "string"
   ) {
-    res.status(STATUS_CODES.Bad_Request).send();
+    res.status(STATUS_CODES.BadRequest).send();
   }
 
   streamFile(token, hashname, res, true);

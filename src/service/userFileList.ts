@@ -14,6 +14,6 @@ export const userFileList = async (req: Request, res: Response) => {
     }
     res.send(await filesByToken(token));
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error).send();
+    res.status(STATUS_CODES.ServerError).send();
   }
 };

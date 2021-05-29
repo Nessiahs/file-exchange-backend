@@ -9,7 +9,7 @@ export const insertFileByHash = (
 ) => {
   return new Promise((resolve, reject) => {
     db.run(
-      "INSERT INTO files (token, filename, hashname, created_at, size) VALUES (?, ?, ?, ?,?)",
+      "INSERT INTO files (token, filename, hashname, created, size) VALUES (?, ?, ?, ?,?)",
       [hash, filename, hashname, moment().format("YYYY-MM-DD HH:mm:ss"), size],
       (err) => {
         if (err) {

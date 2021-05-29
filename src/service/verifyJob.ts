@@ -15,14 +15,14 @@ export const verifyJob = async (req: Request, res: Response) => {
     !isJobType(jobType) ||
     typeof jwtToken !== "string"
   ) {
-    return res.status(STATUS_CODES.Bad_Request);
+    return res.status(STATUS_CODES.BadRequest);
   }
 
   try {
     const { jobType, secret, expires } = await jobByToken(token);
 
     if (jobType !== jobType) {
-      return res.status(STATUS_CODES.Bad_Request).send();
+      return res.status(STATUS_CODES.BadRequest).send();
     }
 
     if (expires && moment(expires) < moment()) {
@@ -56,6 +56,6 @@ export const verifyJob = async (req: Request, res: Response) => {
     }
     res.send();
   } catch (error) {
-    return res.status(STATUS_CODES.Bad_Request).send();
+    return res.status(STATUS_CODES.BadRequest).send();
   }
 };

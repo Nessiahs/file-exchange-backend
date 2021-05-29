@@ -10,7 +10,7 @@ export const deleteFile = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!id || isNaN(Number(id))) {
-    return res.status(STATUS_CODES.Bad_Request).send();
+    return res.status(STATUS_CODES.BadRequest).send();
   }
 
   try {
@@ -20,7 +20,7 @@ export const deleteFile = async (req: Request, res: Response) => {
     await deleteFileById(Number(id));
     res.send();
   } catch (error) {
-    res.status(STATUS_CODES.Server_Error).send();
+    res.status(STATUS_CODES.ServerError).send();
   }
 
   res.send({ delete: id });
