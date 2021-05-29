@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
 import { createUser } from "../db/createUser";
-const rules = [0, 1];
+
 export const addUser = async (req: Request, res: Response) => {
-  let { email, password, isAdmin } = req.body;
+  let { isAdmin } = req.body;
+  const { email, password } = req.body;
   isAdmin = Number(isAdmin);
 
   if (!email || (!password && (isAdmin !== 0 || isAdmin !== 1))) {
