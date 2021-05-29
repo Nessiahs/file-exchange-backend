@@ -6,7 +6,7 @@ export const insertJob = (data: TJob): Promise<boolean> => {
   return new Promise((resolve, reject) => {
     db.run(
       `INSERT INTO jobs
-      (job_type, job_name, secret, expires, created, token, createdBy) VALUES
+      (jobType, jobName, secret, expires, created, token, createdBy) VALUES
       (?,?,?,?,?,?,?)`,
       [
         data.jobType,

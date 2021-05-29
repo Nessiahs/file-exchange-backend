@@ -24,7 +24,7 @@ export const adminJobInfo = async (req: Request, res: Response) => {
         files: values[1],
       });
     })
-    .catch(() => {
+    .catch((err) => {
       res.status(STATUS_CODES.ServerError).send();
     });
 };
