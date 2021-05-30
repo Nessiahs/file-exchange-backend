@@ -26,7 +26,7 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   }
   res.status(STATUS_CODES.Forbidden).send();
 });
-router.get("disk-space", hddStats);
+router.get("/disk-space/", hddStats);
 router.get("/status/", isLogedIn);
 router.get("/download/:folder/:file/", adminDownload);
 router.get("/jobs/:jobType/", jobByType);
