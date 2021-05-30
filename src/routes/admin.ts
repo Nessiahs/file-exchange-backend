@@ -9,6 +9,7 @@ import { auth } from "../service/auth";
 import { createJob } from "../service/createJob";
 import { deleteFile } from "../service/deleteFile";
 import { deleteUser } from "../service/deleteUser";
+import { hddStats } from "../service/hddStats";
 import { isLogedIn } from "../service/isLogedIn";
 import { jobByType } from "../service/jobsByType";
 import { usersList } from "../service/usersList";
@@ -25,6 +26,7 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   }
   res.status(STATUS_CODES.Forbidden).send();
 });
+router.get("/disk-space/", hddStats);
 router.get("/status/", isLogedIn);
 router.get("/download/:folder/:file/", adminDownload);
 router.get("/jobs/:jobType/", jobByType);
