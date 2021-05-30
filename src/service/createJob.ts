@@ -13,7 +13,9 @@ export const createJob = async (req: Request, res: Response) => {
   const token = uuidv4();
   const { jobType, jobName, password, expires } = req.body as TBodyData;
 
-  const link = `${process.env.FRONTEND_URI}${process.env.FRONTEND_UPLOAD_PATH}${token}/`;
+  const link = `${process.env.FRONTEND_URI ?? `https://${req.headers.host}/`}${
+    process.env.FRONTEND_UPLOAD_PATH ?? "upload/"
+  }${token}/`;
 
   try {
     await insertJob({
