@@ -5,7 +5,7 @@ let info = {
   free: 0,
   size: 0,
 };
-let path = "/";
+const path = "/";
 
 let timer: NodeJS.Timeout;
 let errorCount = 0;

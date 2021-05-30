@@ -69,8 +69,8 @@ const gatherJobFolders = async () => {
 gatherJobFolder();
 gatherJobFolders();
 
-setInterval(gatherJobFolders, jobTimer);
-setInterval(gatherJobFolder, jobTimer);
+allTimer = setInterval(gatherJobFolders, jobTimer);
+folderTimer = setInterval(gatherJobFolder, jobTimer);
 
 export const getJobSpace = () => {
   return jobSpace;
