@@ -1,6 +1,5 @@
 import express from "express";
 import fileUpload from "express-fileupload";
-import path from "path";
 import "./config/jwt";
 import "./db/db";
 import { checkInstall } from "./middleware/checkInstall";
@@ -37,13 +36,7 @@ app.use("/install", installRoutes);
 app.get("/verify-job/", verifyJob);
 app.post("/verify-secret/", verifySecret);
 
-app.use(
-  fileUpload({
-    createParentPath: true,
-    useTempFiles: true,
-    tempFileDir: path.join(__dirname, "../tmp"),
-  })
-);
+app.use(fileUpload());
 
 app.use("/upload", uploadRoutes);
 app.use("/admin", adminRoutes);

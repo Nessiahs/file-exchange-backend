@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import fileUpload from "express-fileupload";
-import { copyFile, mkdir, rm } from "fs/promises";
+import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { filePath } from "../config/constants";
 import { STATUS_CODES } from "../config/statusCodes";
 import { insertFileByHash } from "../db/insertFileByHash";
+import { encrypt } from "./encrypt";
 export const receiveFile = async (
   req: Request,
   res: Response,
@@ -20,8 +21,8 @@ export const receiveFile = async (
       recursive: true,
     });
 
-    await copyFile(file.tempFilePath, path.join(target, uuid));
-    await rm(file.tempFilePath);
+    const ec = await encrypt(file.data);
+    await writeFile(path.join(target, `${uuid}.enc`), ec);
     res.send(uuid);
   } catch (error) {
     res.status(STATUS_CODES.ServerError).send(error);

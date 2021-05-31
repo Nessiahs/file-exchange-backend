@@ -15,13 +15,15 @@ export const deleteFile = async (req: Request, res: Response) => {
 
   try {
     const result = await fileById(Number(id));
-    const deletePath = path.join(filePath, result.token, result.hashname);
+    const deletePath = path.join(
+      filePath,
+      result.token,
+      `${result.hashname}.enc`
+    );
     await rm(deletePath);
     await deleteFileById(Number(id));
-    res.send();
+    return res.send();
   } catch (error) {
-    res.status(STATUS_CODES.ServerError).send();
+    return res.status(STATUS_CODES.ServerError).send();
   }
-
-  res.send({ delete: id });
 };
