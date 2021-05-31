@@ -4,6 +4,7 @@ import { isInstalled } from "../config/constants";
 import { STATUS_CODES } from "../config/statusCodes";
 import { createTables } from "../db/createTables";
 import { createUser } from "../db/createUser";
+import { generateCrypto } from "../utils/generateSecret";
 const router = Router({ mergeParams: true });
 
 router.post("/create/", async (req: Request, res: Response) => {
@@ -22,6 +23,7 @@ router.post("/create/", async (req: Request, res: Response) => {
     await createTables();
     await createUser(email, password, 1);
     await writeFile(isInstalled, "");
+    await generateCrypto();
     res.send();
   } catch (error) {
     res.status(STATUS_CODES.ServerError);
