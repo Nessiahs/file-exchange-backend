@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
-import { verifyToken } from "../helper/verifyToken";
+import { verifyToken } from "../utils/verifyToken";
 
 export const TokenAuth = async (
   req: Request,

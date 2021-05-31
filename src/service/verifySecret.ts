@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
 import { jobByToken } from "../db/jobByToken";
 import { isJobType } from "../guards/isJwtType";
-import { createToken } from "../helper/createToken";
+import { createToken } from "../utils/createToken";
 export const verifySecret = async (req: Request, res: Response) => {
   const { secret } = req.body;
   const { "x-job-type": jobType, "x-job-token": token } = req.headers;
