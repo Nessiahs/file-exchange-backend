@@ -22,9 +22,9 @@ router.use(TokenAuth);
 router.use((req: Request, res: Response, next: NextFunction) => {
   if (req.body.tokenData.type === "admin") {
     next();
-    return;
+  } else {
+    res.status(STATUS_CODES.Forbidden).send();
   }
-  res.status(STATUS_CODES.Forbidden).send();
 });
 router.get("/disk-space/", hddStats);
 router.get("/status/", isLogedIn);

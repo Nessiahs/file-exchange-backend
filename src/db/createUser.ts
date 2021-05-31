@@ -1,14 +1,15 @@
 import crypto from "crypto";
 import moment from "moment";
-import { v4 as uuidv4 } from "uuid";
 import { passwordAlgorithm } from "../config/constants";
+import { generateSalt } from "../utils/generateSalt";
 import { db } from "./db";
-export const createUser = (
+
+export const createUser = async (
   email: string,
   password: string,
   isAdmin: 0 | 1
 ): Promise<boolean> => {
-  const salt = uuidv4();
+  const salt = await generateSalt();
   const hash = crypto.createHmac(passwordAlgorithm, salt);
   hash.update(password);
   const dbPass = hash.digest("hex");

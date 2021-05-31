@@ -2,7 +2,7 @@ import crypto from "crypto";
 import { Request, Response } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
 import { userByEmail } from "../db/userByEmail";
-import { createToken } from "../helper/createToken";
+import { createToken } from "../utils/createToken";
 
 export const auth = async (req: Request, res: Response) => {
   const { user, password } = req.body;

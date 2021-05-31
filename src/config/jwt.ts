@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import jwt, { Algorithm } from "jsonwebtoken";
 import path from "path";
-import { getRandomString } from "../helper/getRandomString";
+import { getRandomString } from "../utils/getRandomString";
 
 const getNodeEnv = () => {
   if (!process.env.NODE_ENV) {

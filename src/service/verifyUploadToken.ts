@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
 import { db } from "../db/db";
 import { TUpload } from "../db/types";
-import { createToken } from "../helper/createToken";
-import { verifyToken } from "../helper/verifyToken";
+import { createToken } from "../utils/createToken";
+import { verifyToken } from "../utils/verifyToken";
 
 const tokenPathParams = {
   files: "verified",

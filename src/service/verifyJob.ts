@@ -3,8 +3,8 @@ import moment from "moment";
 import { STATUS_CODES } from "../config/statusCodes";
 import { jobByToken } from "../db/jobByToken";
 import { isJobType } from "../guards/isJwtType";
-import { createToken } from "../helper/createToken";
-import { verifyToken } from "../helper/verifyToken";
+import { createToken } from "../utils/createToken";
+import { verifyToken } from "../utils/verifyToken";
 
 export const verifyJob = async (req: Request, res: Response) => {
   const { "x-job-token": token, "x-job-type": jobType } = req.headers;

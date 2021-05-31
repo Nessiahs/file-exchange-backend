@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
-import { receiveFile } from "../helper/receiveFile";
+import { receiveFile } from "../utils/receiveFile";
 
 export const adminUpload = async (req: Request, res: Response) => {
   const { token } = req.params;

@@ -1,10 +1,12 @@
 import { Response } from "express";
+import { readFile } from "fs/promises";
 import path from "path";
+import { filePath } from "../config/constants";
 import { STATUS_CODES } from "../config/statusCodes";
 import { filenameByTokenHashname } from "../db/filenameByTokenHashname";
 import { incrementDownload } from "../db/incrementDownload";
+import { decrypt } from "./decrypd";
 
-const basePath = path.join(__dirname, "../../files");
 export const streamFile = async (
   folder: string,
   file: string,
@@ -18,7 +20,13 @@ export const streamFile = async (
       await incrementDownload(file);
     }
 
-    return res.download(path.join(basePath, folder, file), filename);
+    const encrypted = await readFile(
+      path.join(filePath, folder, `${file}.enc`)
+    );
+
+    const plain = await decrypt(encrypted);
+
+    return res.send(plain);
   } catch (error) {
     return res.status(STATUS_CODES.NotFound).send();
   }
