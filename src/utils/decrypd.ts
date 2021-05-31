@@ -4,7 +4,8 @@ import { getCryptoKey } from "../db/getCryptoKey";
 
 let key: Buffer;
 
-export const decrypt = async (toDecrypt: Buffer | string) => {
+export const decrypt = async (buffer: Buffer | string) => {
+  let toDecrypt = buffer;
   if (typeof toDecrypt === "string") {
     toDecrypt = Buffer.from(toDecrypt);
   }
