@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import { Request, Response } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
+import { updateUserLogindate } from "../db/updateUserLogindate";
 import { userByEmail } from "../db/userByEmail";
 import { createToken } from "../utils/createToken";
 
@@ -36,6 +37,7 @@ export const auth = async (req: Request, res: Response) => {
         res
       );
 
+      await updateUserLogindate(id);
       res.send({ isAdmin, lastLogin });
     } else {
       res.status(STATUS_CODES.Unauthorized).send();
