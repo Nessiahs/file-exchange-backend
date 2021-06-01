@@ -1,4 +1,3 @@
-import moment from "moment";
 import { db } from "./db";
 import { TJob } from "./types";
 
@@ -7,13 +6,12 @@ export const insertJob = (data: TJob): Promise<boolean> => {
     db.run(
       `INSERT INTO jobs
       (jobType, jobName, secret, expires, created, token, createdBy) VALUES
-      (?,?,?,?,?,?,?)`,
+      (?,?,?,?,datetime('now'),?,?)`,
       [
         data.jobType,
         data.jobName,
         data.secret,
         data.expires,
-        moment().format("YYYY-MM-DD HH:mm:ss"),
         data.token,
         data.createdBy,
       ],
