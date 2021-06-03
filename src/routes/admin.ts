@@ -8,6 +8,7 @@ import { adminUpload } from "../service/adminUpload";
 import { auth } from "../service/auth";
 import { createJob } from "../service/createJob";
 import { deleteFile } from "../service/deleteFile";
+import { deleteJob } from "../service/deleteJob";
 import { deleteUser } from "../service/deleteUser";
 import { hddStats } from "../service/hddStats";
 import { isLogedIn } from "../service/isLogedIn";
@@ -34,6 +35,7 @@ router.post("/create/", createJob);
 router.get("/info/:token/:jobType", adminJobInfo);
 router.post("/upload/file/:token", adminUpload);
 router.delete("/file/:id", deleteFile);
+router.delete("/job/:token", deleteJob);
 
 // From here the user need to be admin
 router.use((req: Request, res: Response, next: NextFunction) => {
