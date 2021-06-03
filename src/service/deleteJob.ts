@@ -15,10 +15,6 @@ export const deleteJob = async (req: Request, res: Response) => {
   const deletePath = path.join(filePath, token);
   try {
     await rmdir(deletePath, { recursive: true });
-  } catch (error) {
-    return res.status(STATUS_CODES.ServerError).send();
-  }
-  try {
     await deleteJobByToken(token);
     res.send();
   } catch (error) {
