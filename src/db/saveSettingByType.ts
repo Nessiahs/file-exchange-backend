@@ -15,7 +15,6 @@ export const saveSettingByType = (
           replace,
           (err) => {
             if (err) {
-              console.log(err);
               return reject(err);
             }
             resolve(true);

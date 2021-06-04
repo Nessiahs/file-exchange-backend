@@ -11,7 +11,6 @@ export const getSettingByType = ($type: string): Promise<string | null> => {
         if (err) {
           return reject(err);
         }
-        console.log(result);
         resolve(result ?? null);
       }
     );

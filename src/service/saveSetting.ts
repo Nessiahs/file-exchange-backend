@@ -9,11 +9,11 @@ export const saveSetting = async (req: Request, res: Response) => {
   if (!allowedSettingType.includes(type)) {
     return res.status(STATUS_CODES.MethodNotAllowed);
   }
-  console.log(type, data);
+
   try {
     await saveSettingByType(type, data);
     res.send();
   } catch (error) {
-    res.status(STATUS_CODES.ServerError).send(error);
+    res.status(STATUS_CODES.ServerError).send();
   }
 };
