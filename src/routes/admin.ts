@@ -10,9 +10,11 @@ import { createJob } from "../service/createJob";
 import { deleteFile } from "../service/deleteFile";
 import { deleteJob } from "../service/deleteJob";
 import { deleteUser } from "../service/deleteUser";
+import { getSetting } from "../service/getSeeting";
 import { hddStats } from "../service/hddStats";
 import { isLogedIn } from "../service/isLogedIn";
 import { jobByType } from "../service/jobsByType";
+import { saveSetting } from "../service/saveSetting";
 import { usersList } from "../service/usersList";
 import { verifyEmail } from "../service/verifyEmail";
 
@@ -44,13 +46,14 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   if (isAdmin === 1) {
     next();
   } else {
-    res.status(STATUS_CODES.Forbidden);
+    res.status(STATUS_CODES.Unauthorized);
   }
 });
-
-router.delete("/user/:id", deleteUser);
-router.post("/verify-email/", verifyEmail);
 router.get("/users/", usersList);
+router.get("/setting/:type/", getSetting);
+router.put("/setting/:type/", saveSetting);
+router.delete("/user/:id/", deleteUser);
+router.post("/verify-email/", verifyEmail);
 router.post("/add-user/", addUser);
 
 export const adminRoutes = router;
