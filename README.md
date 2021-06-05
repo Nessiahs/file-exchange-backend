@@ -4,6 +4,8 @@
 
 Backend for the [File-Exchange Frontend](https://github.com/Nessiahs/file-exchange-ui)
 
+## Environment Variables
+
 To run this project, you will need to add the following environment variables to your .env file
 
 `JWT_EXPIRE` Expire time for the jwt-token, default 1h
