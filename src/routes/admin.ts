@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { STATUS_CODES } from "../config/statusCodes";
+import { ipRestriction } from "../middleware/ipRestriction";
 import { TokenAuth } from "../middleware/TokenAuth";
 import { addUser } from "../service/addUser";
 import { adminDownload } from "../service/adminDownload";
@@ -19,6 +20,9 @@ import { usersList } from "../service/usersList";
 import { verifyEmail } from "../service/verifyEmail";
 
 const router = Router({ mergeParams: true });
+
+router.use(ipRestriction);
+
 router.post("/login/", auth);
 router.use(TokenAuth);
 // Token must be from type admin

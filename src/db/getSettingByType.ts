@@ -2,7 +2,9 @@ import { db } from "./db";
 
 export const allowedSettingType = ["ipRestrictions"];
 
-export const getSettingByType = ($type: string): Promise<string | null> => {
+export const getSettingByType = (
+  $type: string
+): Promise<{ settings: string | null }> => {
   return new Promise((resolve, reject) => {
     db.get(
       "SELECT settings FROM settings WHERE type=$type",
@@ -11,7 +13,7 @@ export const getSettingByType = ($type: string): Promise<string | null> => {
         if (err) {
           return reject(err);
         }
-        resolve(result ?? null);
+        resolve(result ?? { settings: null });
       }
     );
   });

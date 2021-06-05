@@ -9,7 +9,7 @@ export const saveSettingByType = (
     try {
       const dbData = await getSettingByType($type);
       const replace = { $type, $value };
-      if (dbData === null) {
+      if (dbData.settings === null) {
         db.run(
           "INSERT INTO settings (type, settings) VALUES ($type, $value)",
           replace,
