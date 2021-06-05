@@ -28,7 +28,7 @@ For all subroutes must be type in jwt-token `admin`
 
 response:
 
-```json
+```typescript
  {
     disk: {
         size: number,
@@ -50,7 +50,7 @@ response:
 
 response:
 
-```json
+```typescript
 {
     id: number,
     isAdmin: 0 | 1
@@ -85,8 +85,9 @@ Enrypted file
 
 response:
 
-```json
-[{
+```typescript
+[
+  {
     created: dateTime, // YYYY-MM-DD HH:MM:SS
     expires: date, // YYYY-MM-DD
     files: number,
@@ -94,7 +95,8 @@ response:
     jobType: upload | download,
     secret: string,
     token: string,
-}]
+  },
+];
 ```
 
 ### Create a job
@@ -123,7 +125,7 @@ response:
 
 response:
 
-```json
+```typescript
 {
   "files": [{
     created: datetime, // YYYY-MM-DD HH:MM:SS
@@ -184,7 +186,7 @@ To access this routes isAdmin must be `1` in jwt-token
 
 reposne
 
-```json
+```typescript
 [{
     created: datetime, // YYYY-MM-DD HH:MM:SS
     email: string,
@@ -206,8 +208,10 @@ reposne
 
 response:
 
-```json
-    setting: string // JSON encoded
+```typescript
+{
+  setting: string; // JSON encoded
+}
 ```
 
 ### Update setting
@@ -239,7 +243,7 @@ response:
 
 respone:
 
-```json
+```typescript
 {
     allowed: boolean,
 }
