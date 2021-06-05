@@ -88,8 +88,8 @@ response:
 ```typescript
 [
   {
-    created: dateTime, // YYYY-MM-DD HH:MM:SS
-    expires: date, // YYYY-MM-DD
+    created: string, // YYYY-MM-DD HH:MM:SS
+    expires: string, // YYYY-MM-DD
     files: number,
     jobName: string,
     jobType: upload | download,
@@ -110,7 +110,7 @@ response:
 | `jobType`  | `string` | **Required** download or upload      |
 | `jobName`  | `string` | **Required** name of the job in list |
 | `password` | `string` | Secret for protect the job           |
-| `expires`  | `string` | date string                          |
+| `expires`  | `string` | YYYY-MM-DD                           |
 
 ### Job info
 
@@ -128,7 +128,7 @@ response:
 ```typescript
 {
   "files": [{
-    created: datetime, // YYYY-MM-DD HH:MM:SS
+    created: string, // YYYY-MM-DD HH:MM:SS
     downloads: number,
     filename: string,
     hashname: string,
@@ -137,9 +137,9 @@ response:
     token: number,
   ],
   "info": {
-    created: datetime, // YYYY-MM-DD HH:MM:SS
+    created: string, // YYYY-MM-DD HH:MM:SS
     createdBy: number,
-    expires: date, // YYYY-MM-DD
+    expires: string, // YYYY-MM-DD
     jobName: string,
     jobType: string,
     secret: string,
@@ -188,11 +188,11 @@ reposne
 
 ```typescript
 [{
-    created: datetime, // YYYY-MM-DD HH:MM:SS
+    created: string, // YYYY-MM-DD HH:MM:SS
     email: string,
     id: number
     isAdmin: 0 | 1
-    lastLogin: datetime, // YYYY-MM-DD HH:MM:SS
+    lastLogin: string, // YYYY-MM-DD HH:MM:SS
 }]
 ```
 
