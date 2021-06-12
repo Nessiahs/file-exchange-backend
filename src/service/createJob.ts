@@ -7,19 +7,21 @@ import { insertJob } from "../db/insertJob";
 type TBodyData = {
   jobType: "download" | "upload";
   jobName: string;
-  expires?: string;
+  expires: string;
+  privateJob: number;
 };
 
 export const createJob = async (req: Request, res: Response) => {
   const token = uuidv4();
 
-  const { jobType, jobName, expires } = req.body as TBodyData;
+  const { jobType, jobName, expires, privateJob } = req.body as TBodyData;
   const { id: createdBy } = req.body.tokenData;
   const secret = generate({
     length: 8,
     numbers: true,
   });
 
+  console.log(privateJob, typeof privateJob);
   const expireDate = moment().add(expires, "h");
 
   const link = `${process.env.FRONTEND_URI ?? `https://${req.headers.host}/`}${
@@ -34,9 +36,10 @@ export const createJob = async (req: Request, res: Response) => {
       expires: expireDate.format("YYYY-MM-DD HH:mm:ss"),
       token,
       createdBy,
+      privateJob,
     });
     res.send({ link, token, secret });
   } catch (error) {
-    res.status(STATUS_CODES.ServerError).send();
+    res.status(STATUS_CODES.ServerError).send(error);
   }
 };

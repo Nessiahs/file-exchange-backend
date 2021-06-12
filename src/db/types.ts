@@ -47,6 +47,7 @@ export type TJob = {
   secret?: string | null;
   expires?: string | null;
   created?: string;
+  privateJob: number;
   token: string;
   createdBy: number;
 };
