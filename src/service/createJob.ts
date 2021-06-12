@@ -21,7 +21,6 @@ export const createJob = async (req: Request, res: Response) => {
     numbers: true,
   });
 
-  console.log(privateJob, typeof privateJob);
   const expireDate = moment().add(expires, "h");
 
   const link = `${process.env.FRONTEND_URI ?? `https://${req.headers.host}/`}${

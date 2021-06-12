@@ -18,7 +18,6 @@ export const insertJob = (data: TJob): Promise<boolean> => {
       ],
       (err) => {
         if (err) {
-          console.log(err);
           return reject(err);
         }
         resolve(true);
