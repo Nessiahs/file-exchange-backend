@@ -149,6 +149,13 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/generate-password@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@types/generate-password/-/generate-password-1.5.1.tgz#bd2d7296ad51fb0f3819be67acf60623f53da1f8"
+  integrity sha512-VGu9m+z/Itv9GzdiB9VCD3Y2f5VX+tI7OXE/ttBtQPPokl3eIVdahslvK7C18zhjbSoq3yzFbbDzEFwvBwa3bw==
+  dependencies:
+    generate-password "*"
+
 "@types/get-folder-size@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/get-folder-size/-/get-folder-size-2.0.0.tgz#acbb5bf5999410c375b2739863a9d2f9483fabf6"
@@ -1209,6 +1216,11 @@ gauge@~2.7.3:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
+
+generate-password@*, generate-password@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/generate-password/-/generate-password-1.6.0.tgz#9dff4fcca7f831e6832d464509910fab333d0323"
+  integrity sha512-YUJTQkApkLT/fru0QdYWP0lVZdPKhF5kXCP24sgI4gR/vFMJFopCj5t1+9FAKIYcML/nxzx2PMkA1ymO1FC+tQ==
 
 get-folder-size@2.0.0:
   version "2.0.0"
