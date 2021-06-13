@@ -60,7 +60,6 @@ const getSize = (path: string): Promise<number> => {
 const gatherJobFolders = async () => {
   const validToken = await getAllJobs();
 
-  console.log(validToken);
   try {
     const list = await readdir(filePath);
 
