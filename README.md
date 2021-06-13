@@ -29,17 +29,26 @@ For all subroutes must be type in jwt-token `admin`
 response:
 
 ```typescript
- {
-    disk: {
+    {
         size: number,
         free: number
-        }.
-    jobs: {
-        all: number,
-        byJob: {
-            string: number,
-        }
- }
+    }
+
+```
+
+### Disk chart data
+
+```http
+    GET /disk-chart/
+```
+
+```typescript
+[
+  {
+    size: number,
+    color: string,
+  },
+];
 ```
 
 ### Login state and user info

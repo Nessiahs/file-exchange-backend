@@ -3,27 +3,29 @@ import getFolderSize from "get-folder-size";
 import path from "path";
 import { filePath, jobTimer } from "../config/constants";
 type TJobSpace = {
-  all: number;
-  byJob: Record<string, number>;
+  [key: string]: {
+    size: number;
+    color: string;
+  };
 };
 
 const maxError = 5;
 let errorCount = 0;
-let allTimer: NodeJS.Timeout;
-let folderTimer: NodeJS.Timeout;
-let jobSpace: TJobSpace = {
-  all: 0,
-  byJob: {},
-};
+
+let timer: NodeJS.Timeout;
+let jobSpace: TJobSpace = {};
 
 const handleError = () => {
   if (errorCount === maxError) {
-    clearInterval(allTimer);
-    clearInterval(folderTimer);
-    jobSpace = { all: 0, byJob: {} };
+    clearInterval(timer);
+    jobSpace = {};
     return;
   }
   ++errorCount;
+};
+
+const getChartColor = () => {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 };
 
 const getSize = (path: string): Promise<number> => {
@@ -38,39 +40,34 @@ const getSize = (path: string): Promise<number> => {
   });
 };
 
-const gatherJobFolder = async () => {
-  try {
-    jobSpace.all = await getSize(filePath);
-  } catch (error) {
-    handleError();
-  }
-};
-
 const gatherJobFolders = async () => {
   try {
     const list = await readdir(filePath);
-    const result: Record<string, number> = {};
 
     for (const file of list) {
       const p = path.join(filePath, file);
       const f = await lstat(p);
 
-      if (f.isDirectory()) {
-        result[file] = await getSize(p);
+      if (!f.isDirectory()) {
+        continue;
+      }
+
+      if (!jobSpace.hasOwnProperty(file)) {
+        jobSpace[file] = {
+          size: await getSize(p),
+          color: getChartColor(),
+        };
+      } else {
+        jobSpace[file].size = await getSize(p);
       }
     }
-
-    jobSpace.byJob = { ...result };
   } catch (error) {
     handleError();
   }
 };
 
-gatherJobFolder();
+timer = setInterval(gatherJobFolders, jobTimer);
 gatherJobFolders();
-
-allTimer = setInterval(gatherJobFolders, jobTimer);
-folderTimer = setInterval(gatherJobFolder, jobTimer);
 
 export const getJobSpace = () => {
   return jobSpace;
