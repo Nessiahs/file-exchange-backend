@@ -1,7 +1,7 @@
 import { lstat, readdir } from "fs/promises";
 import getFolderSize from "get-folder-size";
 import path from "path";
-import { filePath, jobTimer } from "../config/constants";
+import { filePath } from "../config/constants";
 import { db } from "../db/db";
 type TJobSpace = {
   [key: string]: {
@@ -10,24 +10,11 @@ type TJobSpace = {
   };
 };
 
-const maxError = 5;
-let errorCount = 0;
-
-let timer: NodeJS.Timeout;
-let jobSpace: TJobSpace = {};
-
-const handleError = () => {
-  if (errorCount === maxError) {
-    clearInterval(timer);
-    jobSpace = {};
-    return;
-  }
-  ++errorCount;
-};
-
 type TResult = {
   token: string;
 };
+
+let jobSpace: TJobSpace = {};
 
 const getAllJobs = (): Promise<TResult[]> => {
   return new Promise((resolve, reject) => {
@@ -57,7 +44,7 @@ const getSize = (path: string): Promise<number> => {
   });
 };
 
-const gatherJobFolders = async () => {
+export const gatherJobSizes = async () => {
   const validToken = await getAllJobs();
 
   try {
@@ -89,13 +76,8 @@ const gatherJobFolders = async () => {
         };
       }
     }
-  } catch (error) {
-    handleError();
-  }
+  } catch (error) {}
 };
-
-timer = setInterval(gatherJobFolders, jobTimer);
-gatherJobFolders();
 
 export const getJobSpace = () => {
   return jobSpace;

@@ -7,10 +7,9 @@ import { adminRoutes } from "./routes/admin";
 import { downloadRoutes } from "./routes/download";
 import { installRoutes } from "./routes/install";
 import { uploadRoutes } from "./routes/upload";
+import "./scheduled";
 import { verifyJob } from "./service/verifyJob";
 import { verifySecret } from "./service/verifySecret";
-import "./worker/diskspace";
-import "./worker/jobSpace";
 
 const port = 8080; // default port to listen
 const app = express();

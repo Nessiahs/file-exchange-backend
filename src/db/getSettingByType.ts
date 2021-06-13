@@ -1,6 +1,6 @@
 import { db } from "./db";
 
-export const allowedSettingType = ["ipRestrictions"];
+export const allowedSettingType = ["ipRestrictions", "liveTime"];
 
 export const getSettingByType = (
   $type: string
