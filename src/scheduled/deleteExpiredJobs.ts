@@ -13,7 +13,6 @@ const getJobs = (): Promise<string[]> => {
       `Select token FROM jobs where created <  (SELECT DATETIME('now', '-${liveTime} day'))`,
       (err, results: TResult[]) => {
         if (err) {
-          console.log(err);
           return reject(err);
         }
 
@@ -28,7 +27,7 @@ const deleteJobs = (affectedRows: number): Promise<true> => {
     db.run("BEGIN EXCLUSIVE TRANSACTION;");
     db.run(
       `DELETE FROM jobs WHERE created < (SELECT DATETIME('now', '-${liveTime} day'))`,
-      function (err) {
+      function (err: Error) {
         if (err) {
           return reject(err);
         }

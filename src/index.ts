@@ -7,7 +7,7 @@ import { adminRoutes } from "./routes/admin";
 import { downloadRoutes } from "./routes/download";
 import { installRoutes } from "./routes/install";
 import { uploadRoutes } from "./routes/upload";
-import "./scheduled";
+import { schedule } from "./scheduled";
 import { verifyJob } from "./service/verifyJob";
 import { verifySecret } from "./service/verifySecret";
 
@@ -44,4 +44,5 @@ app.use("/download", downloadRoutes);
 // start the Express server
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
+  schedule();
 });

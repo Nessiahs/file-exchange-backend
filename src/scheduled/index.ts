@@ -5,9 +5,10 @@ import { gatherJobSizes } from "./jobSpace";
 
 const fiveMinutes = "*/5 * * * *";
 
-gatherInfo();
-gatherJobSizes();
-scheduleJob(fiveMinutes, gatherInfo);
-scheduleJob(fiveMinutes, gatherJobSizes);
-scheduleJob("10 1 * * *", deleteExpiredJobs);
-//export const fo = "ba";
+export const schedule = () => {
+  gatherInfo();
+  gatherJobSizes();
+  scheduleJob(fiveMinutes, gatherInfo);
+  scheduleJob(fiveMinutes, gatherJobSizes);
+  scheduleJob("10 1 * * *", deleteExpiredJobs);
+};
