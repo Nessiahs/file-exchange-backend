@@ -11,6 +11,7 @@ import { createJob } from "../service/createJob";
 import { deleteFile } from "../service/deleteFile";
 import { deleteJob } from "../service/deleteJob";
 import { deleteUser } from "../service/deleteUser";
+import { diskCharts } from "../service/diskChart";
 import { getSetting } from "../service/getSeeting";
 import { hddStats } from "../service/hddStats";
 import { isLogedIn } from "../service/isLogedIn";
@@ -33,7 +34,7 @@ router.use((req: Request, res: Response, next: NextFunction) => {
     res.status(STATUS_CODES.Forbidden).send();
   }
 });
-router.get("/disk-space/", hddStats);
+
 router.get("/status/", isLogedIn);
 router.get("/download/:folder/:file/", adminDownload);
 router.get("/jobs/:jobType/", jobByType);
@@ -50,9 +51,11 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   if (isAdmin === 1) {
     next();
   } else {
-    res.status(STATUS_CODES.Unauthorized);
+    res.status(STATUS_CODES.Forbidden).send();
   }
 });
+router.get("/disk-chart/", diskCharts);
+router.get("/disk-space/", hddStats);
 router.get("/users/", usersList);
 router.get("/setting/:type/", getSetting);
 router.put("/setting/:type/", saveSetting);

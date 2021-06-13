@@ -28,17 +28,18 @@ export const createTables = () => {
            "downloads" integer DEFAULT 0
          );`);
 
-        await run(`CREATE TABLE "jobs" (
-           "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-           "token" TEXT NOT NULL,
-           "jobType" TEXT(10) NOT NULL,
-           "jobName" TEXT NOT NULL,
-           "secret" TEXT,
-           "expires" TEXT,
-           "created" TEXT,
-           "createdBy" integer NOT NULL,
-           "done" integer(1,1) NOT NULL DEFAULT 0
-         );`);
+        await run(`CREATE TABLE "main"."jobs" (
+          "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+          "token" TEXT NOT NULL,
+          "jobType" TEXT(10) NOT NULL,
+          "jobName" TEXT NOT NULL,
+          "secret" TEXT,
+          "expires" TEXT,
+          "created" TEXT,
+          "createdBy" integer NOT NULL,
+          "done" integer(1,1) NOT NULL DEFAULT 0,
+          "privateJob" integer(1)
+        );`);
 
         await run(`CREATE TABLE "user" (
            "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,

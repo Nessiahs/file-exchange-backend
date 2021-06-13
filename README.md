@@ -29,17 +29,26 @@ For all subroutes must be type in jwt-token `admin`
 response:
 
 ```typescript
- {
-    disk: {
+    {
         size: number,
         free: number
-        }.
-    jobs: {
-        all: number,
-        byJob: {
-            string: number,
-        }
- }
+    }
+
+```
+
+### Disk chart data
+
+```http
+    GET /disk-chart/
+```
+
+```typescript
+[
+  {
+    size: number,
+    color: string,
+  },
+];
 ```
 
 ### Login state and user info
@@ -88,7 +97,7 @@ response:
 ```typescript
 [
   {
-    created: string, // YYYY-MM-DD HH:MM:SS
+    created: string, // YYYY-MM-DD HH:mm:ss
     expires: string, // YYYY-MM-DD
     files: number,
     jobName: string,
@@ -105,12 +114,12 @@ response:
     POST /create/
 ```
 
-| Parameter  | Type     | Description                          |
-| :--------- | :------- | :----------------------------------- |
-| `jobType`  | `string` | **Required** download or upload      |
-| `jobName`  | `string` | **Required** name of the job in list |
-| `password` | `string` | Secret for protect the job           |
-| `expires`  | `string` | YYYY-MM-DD                           |
+| Parameter    | Type      | Description                          |
+| :----------- | :-------- | :----------------------------------- |
+| `jobType`    | `string`  | **Required** download or upload      |
+| `jobName`    | `string`  | **Required** name of the job in list |
+| `expires`    | `number`  | **Required**                         |
+| `privateJon` | `boolean` | **Required**                         |
 
 ### Job info
 
@@ -128,7 +137,7 @@ response:
 ```typescript
 {
   "files": [{
-    created: string, // YYYY-MM-DD HH:MM:SS
+    created: string, // YYYY-MM-DD HH:mm:ss
     downloads: number,
     filename: string,
     hashname: string,
@@ -137,7 +146,7 @@ response:
     token: number,
   ],
   "info": {
-    created: string, // YYYY-MM-DD HH:MM:SS
+    created: string, // YYYY-MM-DD HH:mm:ss
     createdBy: number,
     expires: string, // YYYY-MM-DD
     jobName: string,
@@ -188,11 +197,11 @@ reposne
 
 ```typescript
 [{
-    created: string, // YYYY-MM-DD HH:MM:SS
+    created: string, // YYYY-MM-DD HH:mm:ss
     email: string,
     id: number
     isAdmin: 0 | 1
-    lastLogin: string, // YYYY-MM-DD HH:MM:SS
+    lastLogin: string, // YYYY-MM-DD HH:mm:ss
 }]
 ```
 
