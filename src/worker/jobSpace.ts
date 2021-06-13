@@ -53,12 +53,21 @@ const gatherJobFolders = async () => {
       }
 
       if (!jobSpace.hasOwnProperty(file)) {
-        jobSpace[file] = {
-          size: await getSize(p),
-          color: getChartColor(),
+        jobSpace = {
+          ...jobSpace,
+          [file]: {
+            size: await getSize(p),
+            color: getChartColor(),
+          },
         };
       } else {
-        jobSpace[file].size = await getSize(p);
+        jobSpace = {
+          ...jobSpace,
+          [file]: {
+            ...jobSpace[file],
+            size: await getSize(p),
+          },
+        };
       }
     }
   } catch (error) {
