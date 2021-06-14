@@ -27,7 +27,7 @@ const deleteJobs = (affectedRows: number): Promise<true> => {
     db.run("BEGIN EXCLUSIVE TRANSACTION;");
     db.run(
       `DELETE FROM jobs WHERE created < (SELECT DATETIME('now', '-${liveTime} day'))`,
-      function (err: Error) {
+      function (err: any) {
         if (err) {
           return reject(err);
         }
