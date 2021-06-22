@@ -47,36 +47,34 @@ const getSize = (path: string): Promise<number> => {
 export const gatherJobSizes = async () => {
   const validToken = await getAllJobs();
 
-  try {
-    const list = await readdir(filePath);
+  const list = await readdir(filePath);
 
-    for (const file of list) {
-      const p = path.join(filePath, file);
-      const f = await lstat(p);
+  for (const file of list) {
+    const p = path.join(filePath, file);
+    const f = await lstat(p);
 
-      if (!f.isDirectory() || !validToken.find((t) => t.token === file)) {
-        continue;
-      }
-
-      if (!jobSpace.hasOwnProperty(file)) {
-        jobSpace = {
-          ...jobSpace,
-          [file]: {
-            size: await getSize(p),
-            color: getChartColor(),
-          },
-        };
-      } else {
-        jobSpace = {
-          ...jobSpace,
-          [file]: {
-            ...jobSpace[file],
-            size: await getSize(p),
-          },
-        };
-      }
+    if (!f.isDirectory() || !validToken.find((t) => t.token === file)) {
+      continue;
     }
-  } catch (error) {}
+
+    if (!jobSpace.hasOwnProperty(file)) {
+      jobSpace = {
+        ...jobSpace,
+        [file]: {
+          size: await getSize(p),
+          color: getChartColor(),
+        },
+      };
+    } else {
+      jobSpace = {
+        ...jobSpace,
+        [file]: {
+          ...jobSpace[file],
+          size: await getSize(p),
+        },
+      };
+    }
+  }
 };
 
 export const getJobSpace = () => {

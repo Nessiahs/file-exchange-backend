@@ -7,10 +7,8 @@ let info = {
 const path = "/";
 
 export const gatherInfo = async () => {
-  try {
-    const { size, free } = await checkDiskSpace(path);
-    info = { size, free };
-  } catch (error) {}
+  const { size, free } = await checkDiskSpace(path);
+  info = { size, free };
 };
 
 export const getDiskInfo = () => {
