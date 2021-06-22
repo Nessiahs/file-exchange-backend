@@ -12,6 +12,7 @@ import { deleteFile } from "../service/deleteFile";
 import { deleteJob } from "../service/deleteJob";
 import { deleteUser } from "../service/deleteUser";
 import { diskCharts } from "../service/diskChart";
+import { getJobsState } from "../service/getJobState";
 import { getSetting } from "../service/getSeeting";
 import { hddStats } from "../service/hddStats";
 import { isLogedIn } from "../service/isLogedIn";
@@ -62,5 +63,6 @@ router.put("/setting/:type/", saveSetting);
 router.delete("/user/:id/", deleteUser);
 router.post("/verify-email/", verifyEmail);
 router.post("/add-user/", addUser);
+router.get("/job-state/", getJobsState);
 
 export const adminRoutes = router;
